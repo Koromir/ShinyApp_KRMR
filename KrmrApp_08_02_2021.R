@@ -223,24 +223,24 @@ server <- shinyServer(function(input, output, session) {
 
     #Creation of a data.frame which contains data for histogram
     dff_1 <- reactive(
-                      filter(data_x, 
+                      filter(data_y, 
                              NAT == input$select_nationality
                             )
                      )
     
     dff_2 <- reactive(
-                      select(dff_1(), BMRKR1, ID)
+                      select(dff_1(), BMRKR1, ID, AGE, SEX)
                      )
 
     # Histogram by ggplot2        
     gg_1 <- reactive(
                      ggplot(
-                            dff_2(), aes(BMRKR1)
+                            dff_2(), aes(AGE)
                            ) +
                             geom_bar(aes(fill = ID), width = 0.3) +
                             theme(axis.text.x = element_text(angle = 65, vjust = 0.6)) +
-                            labs(title = "Histogram on Biomarker variable",
-                                 subtitle = "with specified unique patient ID") 
+                            labs(title = "Histogram on patient age",
+                                 subtitle = "with highlighted patient ID") 
                     )
 
     #Output
