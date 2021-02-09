@@ -113,14 +113,14 @@ if (interactive()) {
                                 mutate(VAR1 = "X") %>%
                                 select(VAR1)
     
-    vector_SEX <- replace(add_sex_column$VAR1, add_sex_column$VAR1 == "X", data2$SEX[match(data_x$ID, data2_splited_id$V5)])
+    vector_SEX <- replace(add_sex_column$VAR1, add_sex_column$VAR1 == "X", data2$SEX[match(data_x$ID, data2_splited_id$V5)]) #A second condition should be added to match() simlar ID & similar NAT
 
     #adding AGE column:
     add_age_column <- data_x %>% 
       mutate(VAR1 = "Y") %>%
       select(VAR1)
     
-    vector_AGE <- replace(add_age_column$VAR1, add_age_column$VAR1 == "Y", data2$AGE[match(data_x$ID, data2_splited_id$V5)])
+    vector_AGE <- replace(add_age_column$VAR1, add_age_column$VAR1 == "Y", data2$AGE[match(data_x$ID, data2_splited_id$V5)]) #A second condition should be added to match() simlar ID & similar NAT
     
     #Updated data.frame data_y:
     data_y <- data_x %>%
