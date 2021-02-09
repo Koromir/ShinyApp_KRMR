@@ -103,6 +103,28 @@ if (interactive()) {
                        mutate(DAYS = c(days2)) %>%
                        select(NAT, ID, BMRKR1, BMRKR2, LBTESTCD, LBTEST, LBCAT, AVAL, AVALU, DAYS)
 
+ #update_1: 09.02.2021
+ ## Merging data from data.frames 'data1' and 'data2':
+    #Spliting string which contains patient id and nationality:
+    data2_splited_id <- as.data.frame(str_split(data2$USUBJID, "-", simplify = TRUE))
+    
+    #adding SEX column:
+    add_sex_column <- data_x %>% 
+                                mutate(VAR1 = "X") %>%
+                                select(VAR1)
+    
+    vector_SEX <- replace(add_sex_column$VAR1, add_sex_column$VAR1 == "X", data2$SEX[match(data_x$ID, data2_splited_id$V5)])
+
+    #adding AGE column:
+    add_age_column <- data_x %>% 
+      mutate(VAR1 = "Y") %>%
+      select(VAR1)
+    
+    vector_AGE <- replace(add_age_column$VAR1, add_age_column$VAR1 == "Y", data2$AGE[match(data_x$ID, data2_splited_id$V5)])
+    
+    #Updated data.frame data_y:
+    data_y <- data_x %>%
+                        mutate(SEX = vector_SEX, AGE = vector_AGE)
     
 ######################################################
 ##################### SHINY APP ######################
