@@ -361,13 +361,13 @@ server <- shinyServer(function(input, output, session) {
                             theme_bw() +
                             geom_smooth() +
                             labs(
-                                 subtitle = "Area Vs Population", 
+                                 subtitle = "by patient id", 
                                  y = "AVAL", 
                                  x = "Days", 
                                  title = "Treatment history", 
                                  caption = "ggplot2 package"
                                  )
-                    )
+                    ) # there are not already days in the xaxis, since I didn't knew what is the meaning of 'BASELINE' in the test history, so I decided to treat it as a normal day.
       
       #Output - plot
       output$MyPlot2 <- renderPlot({
